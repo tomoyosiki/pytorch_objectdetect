@@ -52,6 +52,8 @@ def image_view(ind=None):
         print("origin : {}, local : {}".format(image_origin_path, image))
         if local_name not in os.listdir(PATH_TO_TEST_IMAGES_DIR):
             os.system('cp {} {}'.format(image_origin_path, image))
+            if image.replace(".jpg", "-det.jpg") not in os.listdir(PATH_TO_TEST_IMAGES_DIR):
+                image_path = object_detection.get_objects(image)
             return render_template('imageview.html', index=ind, pager=pager, data={'name':image.replace(".jpg", "-det.jpg")})
         else:
             return render_template('imageview.html', index=ind, pager=pager, data={'name':image.replace(".jpg", "-det.jpg")})
